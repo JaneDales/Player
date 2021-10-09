@@ -1,14 +1,15 @@
 package com.janedales.player
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,10 +28,16 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView?.adapter = adapter
+        val dividerItemDecoration = DividerItemDecoration(
+            this,
+            RecyclerView.VERTICAL
+        )
+        recyclerView?.addItemDecoration(dividerItemDecoration)
 
         initPlayer()
 
-        adapter.setItems(SongList.songList())
+        val list = SongList.songList()
+        adapter.setItems(list)
     }
 
     private fun initPlayer(){
